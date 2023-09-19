@@ -37,6 +37,24 @@ enum alphabet
     z = 26
 };
 
+int lettersum(std::string thing)
+{
+    int size = thing.size();
+    for(int i = 0; i < size; i++)
+    {
+        std::cout << thing[i] << std::endl;
+    }
+    for(int i = 0; i < size; i++)
+    {
+        std::cout << (char)thing[i] << std::endl;
+    }
+    for(int i = 0; i < size; i++)
+    {
+        std::cout << (int)thing[i] << std::endl;
+    }
+    return 0;
+}
+
 void saveInput()
 {
     std::ifstream myfile;
@@ -48,12 +66,18 @@ void saveInput()
         {
             words.push_back(line);
         }
-
     }
     myfile.close();
 }
 
+void saveSums()
+{
+
+}
+
 int main()
 {
-    saveInput();
+    //saveInput();
+    saveSums();
+    lettersum("a");
 }
