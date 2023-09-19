@@ -6,6 +6,7 @@
 std::vector<std::string> words;
 std::vector<int> amountOfTimes;
 
+//I don't know if I should use this
 enum alphabet
 {
     empty = 0,
@@ -40,24 +41,19 @@ enum alphabet
 int lettersum(std::string thing)
 {
     int size = thing.size();
+    int lettersum = 0;
+    // should I use a switch instead??
     for(int i = 0; i < size; i++)
     {
-        std::cout << thing[i] << std::endl;
+        lettersum += (int)thing[i] - 96;
     }
-    for(int i = 0; i < size; i++)
-    {
-        std::cout << (char)thing[i] << std::endl;
-    }
-    for(int i = 0; i < size; i++)
-    {
-        std::cout << (int)thing[i] << std::endl;
-    }
-    return 0;
+    return lettersum;
 }
 
 void saveInput()
 {
     std::ifstream myfile;
+    //myfile.open("example.txt");
     myfile.open("Input.txt");
     if(myfile.is_open())
     {
@@ -72,12 +68,21 @@ void saveInput()
 
 void saveSums()
 {
-
+    //segfault, I guess use a map
+    int value = 0;
+    for(int i = 0; i < words.size(); i++)
+    {
+        value = lettersum(words.at(i));
+        amountOfTimes[value] += 1;
+    }
 }
 
 int main()
 {
-    //saveInput();
+    saveInput();
     saveSums();
-    lettersum("a");
+    for(int i = 0; i <= amountOfTimes.size(); i++)
+    {
+        std::cout << amountOfTimes[i] << std::endl;
+    }
 }
