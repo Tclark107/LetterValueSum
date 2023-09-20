@@ -56,6 +56,11 @@ int lettersum(std::string word)
     return lettersum;
 }
 
+void findWordsForSum(int sum)
+{
+
+}
+
 void saveInput()
 {
     std::ifstream myfile;
@@ -79,7 +84,6 @@ void saveSums()
     for(int i = 0; i < words.size(); i++)
     {
         value = (int)lettersum(words.at(i));
-        std::cout << "Tjc new word value = " << value << std::endl;
         amountOfTimes[value] += 1;
     }
 }
@@ -88,11 +92,5 @@ int main()
 {
     saveInput();
     saveSums();
-    std::map<int,int>::iterator it = amountOfTimes.begin();
-    while(it != amountOfTimes.end())
-    {
-        std::cout << it->first << " appears " << it->second << " times" << std::endl;
-        ++it;
-    }
     return 0;
 }
