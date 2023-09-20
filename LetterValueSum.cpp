@@ -2,9 +2,10 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <map>
 
 std::vector<std::string> words;
-std::vector<int> amountOfTimes;
+std::map <int,int> amountOfTimes;
 
 //I don't know if I should use this
 enum alphabet
@@ -38,14 +39,19 @@ enum alphabet
     z = 26
 };
 
-int lettersum(std::string thing)
+int lettersum(std::string word)
 {
-    int size = thing.size();
+    int size = word.size();
     int lettersum = 0;
-    // should I use a switch instead??
-    for(int i = 0; i < size; i++)
+    // size - 1 because the last value is carrage return
+    // is there an empty space after a c++ string??
+    // the right way to do this would be to strip whitespace off these
+    // I'm cheating for speed
+    // TODO: strip white space
+    // I can cheat because I know what Input I am getting
+    for(int i = 0; i < size-1; i++)
     {
-        lettersum += (int)thing[i] - 96;
+        lettersum += (int)word[i] - 96;
     }
     return lettersum;
 }
@@ -54,7 +60,8 @@ void saveInput()
 {
     std::ifstream myfile;
     //myfile.open("example.txt");
-    myfile.open("Input.txt");
+    myfile.open("example2.txt");
+    //myfile.open("Input.txt");
     if(myfile.is_open())
     {
         std::string line;
@@ -68,11 +75,11 @@ void saveInput()
 
 void saveSums()
 {
-    //segfault, I guess use a map
     int value = 0;
     for(int i = 0; i < words.size(); i++)
     {
-        value = lettersum(words.at(i));
+        value = (int)lettersum(words.at(i));
+        std::cout << "Tjc new word value = " << value << std::endl;
         amountOfTimes[value] += 1;
     }
 }
@@ -81,8 +88,11 @@ int main()
 {
     saveInput();
     saveSums();
-    for(int i = 0; i <= amountOfTimes.size(); i++)
+    std::map<int,int>::iterator it = amountOfTimes.begin();
+    while(it != amountOfTimes.end())
     {
-        std::cout << amountOfTimes[i] << std::endl;
+        std::cout << it->first << " appears " << it->second << " times" << std::endl;
+        ++it;
     }
+    return 0;
 }
