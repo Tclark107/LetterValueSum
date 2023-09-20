@@ -39,6 +39,14 @@ enum alphabet
     z = 26
 };
 
+void findSum319(std::string word, int lettersum)
+{
+    if(lettersum == 319)
+    {
+        std::cout << "The number with 319 is " << word << std::endl;
+    }
+}
+
 int lettersum(std::string word)
 {
     int size = word.size();
@@ -53,20 +61,30 @@ int lettersum(std::string word)
     {
         lettersum += (int)word[i] - 96;
     }
+
+    // Quick and easy way to find 319
+    // TODO: could make this better to allow user to find any number
+    findSum319(word, lettersum);
+    
     return lettersum;
 }
 
 void findWordsForSum(int sum)
 {
-
+    //If I were to expand the find319 functionality this is 
+    //where I would do it
+    //current plan
+    //rather than save an int to map, we would save an array
+    //then here we could give the map->second and iterate through
+    //to give all the words and return array.size to give amount
 }
 
 void saveInput()
 {
     std::ifstream myfile;
     //myfile.open("example.txt");
-    myfile.open("example2.txt");
-    //myfile.open("Input.txt");
+    //myfile.open("example2.txt");
+    myfile.open("Input.txt");
     if(myfile.is_open())
     {
         std::string line;
@@ -88,9 +106,35 @@ void saveSums()
     }
 }
 
+int findOdds()
+{
+    int countOfOdds = 0;
+    std::map<int,int>::iterator it = amountOfTimes.begin();
+    while(it != amountOfTimes.end())
+    {
+        if(it->second % 2 != 0)
+        {
+            countOfOdds += 1;
+        }
+        it++;
+    }
+    return countOfOdds;
+}
+
+void findMostSums()
+{
+
+}
+
 int main()
 {
     saveInput();
     saveSums();
+
+    int odds = findOdds();
+    std::cout << "odds = " << odds << std::endl;
+
+    findMostSums();
+
     return 0;
 }
