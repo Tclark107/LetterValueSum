@@ -100,8 +100,8 @@ void saveInput()
 {
     std::ifstream myfile;
     //myfile.open("example.txt");
-    myfile.open("example2.txt");
-    //myfile.open("Input.txt");
+    //myfile.open("example2.txt");
+    myfile.open("Input.txt");
     if(myfile.is_open())
     {
         std::string line;
@@ -148,16 +148,16 @@ int findMostSums()
 
     while(it != amountOfTimes.end())
     {
-        std::cout << "fuck " << std::endl;
         previousGreatestAmount = greatestAmount;
         greatestAmount = std::max(it->second, previousGreatestAmount);
         if(greatestAmount > previousGreatestAmount)
         {
             greatestSum = it->first;
         }
+        it++;
     }
 
-    return amountOfTimes[greatestSum];
+    return greatestSum;
 }
 
 int main()
@@ -168,7 +168,9 @@ int main()
     int odds = findOdds();
     std::cout << "odds = " << odds << std::endl;
 
-    std::cout << "greatestSum is " << findMostSums() << std::endl;
+    int greatestsum = findMostSums();
+    std::cout << "the sum that shows up the most is " << greatestsum << std::endl;
+    std::cout << "And it shows up " << amountOfTimes[greatestsum] << " times" << std::endl;
 
     //prompt6
     //as you compare each word, check it has a different sum and length
