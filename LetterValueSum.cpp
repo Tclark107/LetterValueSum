@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <algorithm>
 
 std::vector<std::string> words;
 std::map <int,int> amountOfTimes;
@@ -79,12 +80,28 @@ void findWordsForSum(int sum)
     //to give all the words and return array.size to give amount
 }
 
+void findWordsBySumAndLength(int sum, int len)
+{
+    //prompt 4
+}
+
+void findNoLettersInCommon()
+{
+    //prompt 5
+    //if we save a list with all the letters in common in a map
+    //then we just compare everylist with itslef and find
+    //letters that each word has in common
+    //the way I'm thinking this would be kind of slow
+    //but it would do it
+    //we only have to check lists with lengths greater than 1
+}
+
 void saveInput()
 {
     std::ifstream myfile;
     //myfile.open("example.txt");
-    //myfile.open("example2.txt");
-    myfile.open("Input.txt");
+    myfile.open("example2.txt");
+    //myfile.open("Input.txt");
     if(myfile.is_open())
     {
         std::string line;
@@ -121,9 +138,26 @@ int findOdds()
     return countOfOdds;
 }
 
-void findMostSums()
+// should be easy
+int findMostSums()
 {
+    std::map<int,int>::iterator it = amountOfTimes.begin();
+    int greatestAmount = 0;
+    int previousGreatestAmount = 0;
+    int greatestSum = 0;
 
+    while(it != amountOfTimes.end())
+    {
+        std::cout << "fuck " << std::endl;
+        previousGreatestAmount = greatestAmount;
+        greatestAmount = std::max(it->second, previousGreatestAmount);
+        if(greatestAmount > previousGreatestAmount)
+        {
+            greatestSum = it->first;
+        }
+    }
+
+    return amountOfTimes[greatestSum];
 }
 
 int main()
@@ -134,7 +168,11 @@ int main()
     int odds = findOdds();
     std::cout << "odds = " << odds << std::endl;
 
-    findMostSums();
+    std::cout << "greatestSum is " << findMostSums() << std::endl;
+
+    //prompt6
+    //as you compare each word, check it has a different sum and length
+    //to each one after it??? don't know yet 
 
     return 0;
 }
